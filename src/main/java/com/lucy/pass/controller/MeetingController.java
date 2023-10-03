@@ -1,6 +1,7 @@
 package com.lucy.pass.controller;
 
 import com.lucy.pass.repository.Meeting;
+import com.lucy.pass.request.AttendeeRequest;
 import com.lucy.pass.request.MeetingRequest;
 import com.lucy.pass.response.MeetingResponse;
 import com.lucy.pass.service.GroupService;
@@ -18,6 +19,7 @@ public class MeetingController {
 
     private final GroupService groupService;
 
+    // todo :: delete
     @GetMapping("/meetings")
     public ResponseEntity<List<MeetingResponse>> findMeetings() {
         List<Meeting> meetings = groupService.findGroups();
@@ -48,6 +50,15 @@ public class MeetingController {
             @RequestBody MeetingRequest request
     ) {
         groupService.updateGroup(id, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/meetings/{id}/attendees")
+    public ResponseEntity<Void> addAttendees(
+            @PathVariable Long id,
+            @RequestBody List<AttendeeRequest> requests
+    ) {
+        groupService.addAttendee(id, requests);
         return ResponseEntity.ok().build();
     }
 }

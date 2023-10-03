@@ -1,6 +1,7 @@
 package com.lucy.pass.request;
 
 import com.lucy.pass.repository.Meeting;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 
 
@@ -8,6 +9,7 @@ import lombok.Getter;
 @Getter
 public class MeetingRequest {
 
+    @NotEmpty
     private String name;
     private String description;
 
