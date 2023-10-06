@@ -14,10 +14,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(schema = "v1", name = "meeting")
 public final class Meeting {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty

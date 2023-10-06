@@ -24,7 +24,7 @@ public class GroupService {
     private final AttendeeRepository attendeeRepository;
 
     public List<Meeting> findGroups() {
-        return meetingRepository.findAll();
+        return meetingRepository.findAllByOrderByCreatedAtDesc();
     }
 
     public Meeting findMeetingById(Long id) {

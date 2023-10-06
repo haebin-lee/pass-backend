@@ -1,0 +1,11 @@
+INSERT INTO v1.meeting (name, description, created_at) VALUES
+    ('Project Kickoff Meeting', 'This meeting marks the official start of our new project. We will discuss project goals, team roles, and the initial timeline.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Weekly Sales Team Meeting', 'Our weekly sales team meeting to review sales performance, set targets for the upcoming week, and share success stories.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Product Development Brainstorming', 'A creative brainstorming session to generate ideas for our next product. Bring your innovative thinking caps.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Quarterly Financial Review', 'A detailed review of our financial performance for the past quarter, including revenue, expenses, and profitability.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Company Town Hall Meeting', 'Join us for our quarterly company town hall meeting where we''ll discuss company updates, achievements, and future plans.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('HR Benefits Seminar', 'Learn about our employee benefits program, including health insurance, retirement plans, and wellness initiatives.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Marketing Campaign Review', 'A deep dive into the performance of our latest marketing campaigns, including ROI analysis and lessons learned.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Customer Support Training', 'Training session for our customer support team to enhance communication and problem-solving skills.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('IT Security Workshop', 'Stay updated on the latest cybersecurity threats and best practices to protect our company''s data.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP())),
+    ('Employee Recognition Ceremony', 'A special event to recognize and celebrate outstanding employees and their contributions.', TIMESTAMPADD(SECOND, -1 * ROUND(RAND() * 604800), CURRENT_TIMESTAMP()));
