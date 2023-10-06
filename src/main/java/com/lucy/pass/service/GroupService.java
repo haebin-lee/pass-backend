@@ -32,9 +32,9 @@ public class GroupService {
     }
 
     @Transactional
-    public void addGroup(MeetingRequest request) {
+    public Meeting addGroup(MeetingRequest request) {
         Meeting meeting = request.toEntity();
-        meetingRepository.save(meeting);
+        return meetingRepository.save(meeting);
     }
 
     @Transactional

@@ -40,8 +40,9 @@ public class MeetingController {
     public ResponseEntity<MeetingResponse> addMeetings(
             @RequestBody MeetingRequest request
     ) {
-        groupService.addGroup(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Meeting meeting = groupService.addGroup(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new MeetingResponse(meeting));
     }
 
     @PutMapping("/meetings/{id}")
