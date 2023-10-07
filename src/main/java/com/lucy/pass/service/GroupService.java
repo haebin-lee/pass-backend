@@ -1,5 +1,7 @@
 package com.lucy.pass.service;
 
+import com.lucy.pass.exception.BusinessException;
+import com.lucy.pass.exception.PassException;
 import com.lucy.pass.repository.Attendee;
 import com.lucy.pass.repository.AttendeeRepository;
 import com.lucy.pass.repository.Meeting;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 // todo: design throw object
 
@@ -28,7 +29,7 @@ public class GroupService {
     }
 
     public Meeting findMeetingById(Long id) {
-        return meetingRepository.findById(id).get();
+        return meetingRepository.findById(id).orElseThrow(() -> new BusinessException(PassException.NOT_FOUND_MEETING));
     }
 
     @Transactional
