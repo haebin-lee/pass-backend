@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(schema = "v1", name = "meeting")
+@Table(schema = "pass", name = "meeting")
 public final class Meeting {
 
     @Id
@@ -29,14 +30,29 @@ public final class Meeting {
     @OneToMany(mappedBy = "meeting")
     private List<Attendee> attendees = new ArrayList<>();
 
+    private String qrUrl;
+
+    private LocalDateTime eventAt;
+
+    private boolean registerNow;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
     @Builder
-    public Meeting(String name, String description) {
+    public Meeting(Long id,
+                   String name,
+                   String description,
+                   String qrUrl,
+                   LocalDateTime eventAt,
+                   boolean registerNow) {
+        this.id = id;
         this.name = name;
         this.description = description;
+        this.qrUrl = qrUrl;
+        this.eventAt = eventAt;
+        this.registerNow = registerNow;
         this.createdAt = LocalDateTime.now();
     }
 

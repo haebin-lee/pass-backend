@@ -6,13 +6,10 @@ import lombok.Getter;
 @Getter
 public class AttendeeResponse {
 
-    private Long id;
-
-    private String name;
-
-    private String email;
-
-    private String phone;
+    private final Long id;
+    private final String name;
+    private final String email;
+    private final String phone;
 
     public AttendeeResponse(Attendee attendee) {
         this.id = attendee.getId();

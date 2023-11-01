@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(schema = "v1", name = "attendee")
+@Table(schema = "pass", name = "attendee")
 public class Attendee {
 
     @Id

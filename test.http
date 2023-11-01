@@ -1,0 +1,24 @@
+
+### health
+GET http://localhost:8080/health
+
+
+### retrieve all meettings
+GET http://localhost:8080/meetings
+
+
+### retireve a meeting associated with id
+GET http://localhost:8080/meetings/1
+
+
+### register a meeting
+POST http://localhost:8080/meetings
+Content-Type: application/json
+
+{
+  "name": "Happy Halloween!",
+  "description": "Have an happy hour with your classmate",
+  "qrUrl": "www.google.com",
+  "eventAt": "1698800548085",
+  "registerNow": true
+}
