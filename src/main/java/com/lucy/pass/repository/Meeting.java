@@ -32,6 +32,8 @@ public final class Meeting {
 
     private String qrUrl;
 
+    private String validationUrl;
+
     private LocalDateTime eventAt;
 
     private boolean registerNow;
@@ -45,12 +47,14 @@ public final class Meeting {
                    String name,
                    String description,
                    String qrUrl,
+                   String validationUrl,
                    LocalDateTime eventAt,
                    boolean registerNow) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.qrUrl = qrUrl;
+        this.validationUrl = validationUrl;
         this.eventAt = eventAt;
         this.registerNow = registerNow;
         this.createdAt = LocalDateTime.now();

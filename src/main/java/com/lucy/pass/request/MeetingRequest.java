@@ -17,7 +17,8 @@ public class MeetingRequest {
     private String name;
     private String description;
     private String qrUrl;
-//    private LocalDateTime eventAt;
+    private String validationUrl;
+    private LocalDateTime eventAt;
     private boolean registerNow;
 
     public Meeting toEntity() {
@@ -25,7 +26,8 @@ public class MeetingRequest {
                 .name(this.name)
                 .description(this.description)
                 .qrUrl(this.qrUrl)
-//                .eventAt(this.eventAt)
+                .validationUrl(this.validationUrl)
+                .eventAt(this.eventAt)
                 .registerNow(this.registerNow)
                 .build();
     }
