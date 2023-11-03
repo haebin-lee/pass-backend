@@ -1,6 +1,7 @@
 package com.lucy.pass.repository;
 
 
+import com.lucy.pass.request.MeetingUpdateRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -27,7 +29,7 @@ public final class Meeting {
 
     private String description;
 
-    @OneToMany(mappedBy = "meeting")
+    @OneToMany(mappedBy = "meeting", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Attendee> attendees = new ArrayList<>();
 
     private String qrUrl;
@@ -64,10 +66,17 @@ public final class Meeting {
         return this.attendees != null ? attendees : new ArrayList<>();
     }
 
-    public void update(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public void update(MeetingUpdateRequest request) {
+        this.name = request.getName();
+        this.description = request.getDescription();
+        this.eventAt = request.getEventAt();
+        this.registerNow = request.isRegisterNow();
         this.updatedAt = LocalDateTime.now();
+
+        this.attendees.clear();
+        this.attendees = request.getAttendees().stream()
+                .map(attendee -> new Attendee(this, attendee))
+                .collect(Collectors.toList());
     }
 
     public void addAttendees(List<Attendee> attendees) {

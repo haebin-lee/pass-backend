@@ -3,6 +3,7 @@ package com.lucy.pass.controller;
 import com.lucy.pass.repository.Meeting;
 import com.lucy.pass.request.AttendeeRequest;
 import com.lucy.pass.request.MeetingRequest;
+import com.lucy.pass.request.MeetingUpdateRequest;
 import com.lucy.pass.response.MeetingResponse;
 import com.lucy.pass.service.GroupService;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ public class MeetingController {
     @PutMapping("/meetings/{id}")
     public ResponseEntity<MeetingResponse> updateMeeting(
             @PathVariable Long id,
-            @RequestBody MeetingRequest request
+            @RequestBody MeetingUpdateRequest request
     ) {
         groupService.updateGroup(id, request);
         return ResponseEntity.ok().build();

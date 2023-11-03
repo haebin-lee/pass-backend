@@ -8,6 +8,7 @@ import com.lucy.pass.repository.Meeting;
 import com.lucy.pass.repository.MeetingRepository;
 import com.lucy.pass.request.AttendeeRequest;
 import com.lucy.pass.request.MeetingRequest;
+import com.lucy.pass.request.MeetingUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +40,9 @@ public class GroupService {
     }
 
     @Transactional
-    public void updateGroup(Long id, MeetingRequest request) {
+    public void updateGroup(Long id, MeetingUpdateRequest request) {
         Meeting meeting = findMeetingById(id);
-        meeting.update(request.getName(), request.getDescription());
+        meeting.update(request);
     }
 
     @Transactional

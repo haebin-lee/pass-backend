@@ -22,3 +22,26 @@ Content-Type: application/json
   "eventAt": "1698800548085",
   "registerNow": true
 }
+
+### update a meeting
+PUT http://localhost:8080/meetings/1
+Content-Type: application/json
+
+{
+  "name": "Happy Halloween!",
+  "description": "Have an happy hour with your classmate",
+  "registerNow": true,
+  "attendees": [{
+    "name": "Lucy",
+    "email": "hlee109@dons.usfca.edu",
+    "phone": "6267863192"
+  },{
+    "name": "Haebin",
+    "email": "hblee8080@gmail.com",
+    "phone": "01024226891"
+  },{
+    "name": "luckylucy",
+    "email": "luckylucy0717@gmail.com",
+    "phone": "6267863192"
+  }]
+}
