@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,8 @@ public final class Meeting {
 
     private String qrUrl;
 
-    private String validationUrl;
+    @Column(unique=true)
+    private String key;
 
     private LocalDateTime eventAt;
 
@@ -49,14 +49,14 @@ public final class Meeting {
                    String name,
                    String description,
                    String qrUrl,
-                   String validationUrl,
+                   String key,
                    LocalDateTime eventAt,
                    boolean registerNow) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.qrUrl = qrUrl;
-        this.validationUrl = validationUrl;
+        this.key = key;
         this.eventAt = eventAt;
         this.registerNow = registerNow;
         this.createdAt = LocalDateTime.now();

@@ -17,7 +17,6 @@ public class Attendee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "meeting_id")
     private Meeting meeting;
@@ -51,5 +50,9 @@ public class Attendee {
         this.email = request.getEmail();
         this.phone = request.getPhone();
         this.status = request.getStatus();
+    }
+
+    public void confirmAttendance() {
+        this.status = AttendanceStatus.ATTNEDED;
     }
 }

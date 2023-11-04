@@ -45,3 +45,12 @@ Content-Type: application/json
     "phone": "6267863192"
   }]
 }
+
+
+### confirm
+POST http://localhost:8080/meetings/1/attendees/confirm
+Content-Type: application/json
+
+{
+  "name": "Lucy"
+}

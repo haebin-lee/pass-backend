@@ -15,7 +15,7 @@ public class MeetingResponse {
     private final String description;
     private final List<AttendeeResponse> attendees;
     private final String qrUrl;
-    private final String validationUrl;
+    private final String key;
     private final LocalDateTime eventAt;
     private final boolean registerNow;
     private final LocalDateTime createdAt;
@@ -29,7 +29,7 @@ public class MeetingResponse {
                 .map(AttendeeResponse::new)
                 .collect(Collectors.toList());
         this.qrUrl = meeting.getQrUrl();
-        this.validationUrl = meeting.getValidationUrl();
+        this.key = meeting.getKey();
         this.eventAt = meeting.getEventAt();
         this.registerNow = meeting.isRegisterNow();
         this.createdAt = meeting.getCreatedAt();

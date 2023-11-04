@@ -1,6 +1,7 @@
 package com.lucy.pass.controller;
 
 import com.lucy.pass.repository.Meeting;
+import com.lucy.pass.request.AttendeeConfirmRequest;
 import com.lucy.pass.request.AttendeeRequest;
 import com.lucy.pass.request.MeetingRequest;
 import com.lucy.pass.request.MeetingUpdateRequest;
@@ -62,5 +63,13 @@ public class MeetingController {
     ) {
         groupService.addAttendee(id, requests);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/meetings/{key}/attendees/confirm")
+    public ResponseEntity<Boolean> confirmAttendee(
+            @PathVariable String key,
+            @RequestBody AttendeeConfirmRequest request) {
+        boolean confirm = groupService.confirmAttendee(key, request);
+        return ResponseEntity.ok(confirm);
     }
 }

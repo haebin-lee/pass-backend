@@ -17,7 +17,7 @@ public class MeetingRequest {
     private String name;
     private String description;
     private String qrUrl;
-    private String validationUrl;
+    private String key;
     private LocalDateTime eventAt;
     private boolean registerNow;
 
@@ -26,7 +26,7 @@ public class MeetingRequest {
                 .name(this.name)
                 .description(this.description)
                 .qrUrl(this.qrUrl)
-                .validationUrl(this.validationUrl)
+                .key(this.key)
                 .eventAt(this.eventAt)
                 .registerNow(this.registerNow)
                 .build();

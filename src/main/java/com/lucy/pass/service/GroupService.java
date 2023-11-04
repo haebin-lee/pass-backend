@@ -6,6 +6,7 @@ import com.lucy.pass.repository.Attendee;
 import com.lucy.pass.repository.AttendeeRepository;
 import com.lucy.pass.repository.Meeting;
 import com.lucy.pass.repository.MeetingRepository;
+import com.lucy.pass.request.AttendeeConfirmRequest;
 import com.lucy.pass.request.AttendeeRequest;
 import com.lucy.pass.request.MeetingRequest;
 import com.lucy.pass.request.MeetingUpdateRequest;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 // todo: design throw object
 
@@ -53,5 +55,19 @@ public class GroupService {
                 .toList();
         attendeeRepository.saveAll(attendees);
         meeting.addAttendees(attendees);
+    }
+
+    @Transactional
+    public boolean confirmAttendee(String key, AttendeeConfirmRequest request) {
+
+        Optional<Meeting> mOptional = meetingRepository.findByKey(key);
+        if (mOptional.isEmpty()) return false;
+        Optional<Attendee> aOptional = attendeeRepository.findByMeetingAndName(mOptional.get(), request.getName());
+        if (aOptional.isPresent()) {
+            Attendee attendee = aOptional.get();
+            attendee.confirmAttendance();
+            return true;
+        }
+        return false;
     }
 }
