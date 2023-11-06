@@ -1,7 +1,7 @@
 package com.lucy.pass.dto;
 
 public enum AttendanceStatus {
-    ATTNEDED,
+    ATTENDED,
     NOT_ATTENDED,
     UNKNOWN;
 }

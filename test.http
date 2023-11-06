@@ -60,4 +60,4 @@ Content-Type: application/json
 POST http://localhost:8080/meetings/39/attendees
 Content-Type: application/json
 
-[{"id":1,"name":"Haebin Lee","email":"hblee8080@gmail.com","phone":"1024226891"},{"id":2,"name":"Lucy","email":"hblee8080@gmail.com","phone":"16267863192","status":"ATTENDED"}]
+[{"name":"sdfdjkjk","email":"dsjdfkdj","phone":"dkfjskdj"},{"name":"sdkflsdk","email":"sldkfldk","phone":"dlfkd","status":"ATTENDED"},{"name":"dslkdflk","email":"dlfksldkf","phone":"sdlkflskdf"}]

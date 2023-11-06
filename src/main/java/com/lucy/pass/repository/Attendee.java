@@ -53,6 +53,6 @@ public class Attendee {
     }
 
     public void confirmAttendance() {
-        this.status = AttendanceStatus.ATTNEDED;
+        this.status = AttendanceStatus.ATTENDED;
     }
 }
