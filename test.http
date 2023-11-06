@@ -54,3 +54,10 @@ Content-Type: application/json
 {
   "name": "Lucy"
 }
+
+
+###
+POST http://localhost:8080/meetings/39/attendees
+Content-Type: application/json
+
+[{"id":1,"name":"Haebin Lee","email":"hblee8080@gmail.com","phone":"1024226891"},{"id":2,"name":"Lucy","email":"hblee8080@gmail.com","phone":"16267863192","status":"ATTENDED"}]
