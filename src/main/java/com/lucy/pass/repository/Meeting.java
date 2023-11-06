@@ -1,6 +1,7 @@
 package com.lucy.pass.repository;
 
 
+import com.lucy.pass.dto.VerificationMethod;
 import com.lucy.pass.request.MeetingUpdateRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -38,6 +39,9 @@ public final class Meeting {
 
     private LocalDateTime eventAt;
 
+    @Enumerated(EnumType.STRING)
+    private VerificationMethod verificationMethod;
+
     private boolean registerNow;
 
     private LocalDateTime createdAt;
@@ -51,7 +55,8 @@ public final class Meeting {
                    String qrUrl,
                    String key,
                    LocalDateTime eventAt,
-                   boolean registerNow) {
+                   boolean registerNow,
+                   VerificationMethod verificationMethod) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -59,6 +64,7 @@ public final class Meeting {
         this.key = key;
         this.eventAt = eventAt;
         this.registerNow = registerNow;
+        this.verificationMethod = verificationMethod;
         this.createdAt = LocalDateTime.now();
     }
 

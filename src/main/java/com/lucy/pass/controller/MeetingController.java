@@ -21,10 +21,11 @@ public class MeetingController {
 
     private final GroupService groupService;
 
-    // todo :: delete
     @GetMapping("/meetings")
-    public ResponseEntity<List<MeetingResponse>> findMeetings() {
-        List<Meeting> meetings = groupService.findGroups();
+    public ResponseEntity<List<MeetingResponse>> findMeetings(
+            @RequestParam(required = false) String key
+    ) {
+        List<Meeting> meetings = groupService.findGroups(key);
         return ResponseEntity.ok(meetings.stream()
                 .map(MeetingResponse::new)
                 .collect(Collectors.toList()));

@@ -7,4 +7,5 @@ import lombok.Getter;
 public class AttendeeConfirmRequest {
     private String name;
     private String email;
+    private String phone;
 }

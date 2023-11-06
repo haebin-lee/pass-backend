@@ -1,5 +1,6 @@
 package com.lucy.pass.service;
 
+import com.lucy.pass.dto.VerificationMethod;
 import com.lucy.pass.exception.BusinessException;
 import com.lucy.pass.exception.PassException;
 import com.lucy.pass.repository.Attendee;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // todo: design throw object
 
@@ -27,8 +29,10 @@ public class GroupService {
     private final MeetingRepository meetingRepository;
     private final AttendeeRepository attendeeRepository;
 
-    public List<Meeting> findGroups() {
-        return meetingRepository.findAllByOrderByCreatedAtDesc();
+    public List<Meeting> findGroups(String key) {
+        if (key == null)
+            return meetingRepository.findAllByOrderByCreatedAtDesc();
+        return meetingRepository.findByKey(key).stream().collect(Collectors.toList());
     }
 
     public Meeting findMeetingById(Long id) {
@@ -38,7 +42,9 @@ public class GroupService {
     @Transactional
     public Meeting addGroup(MeetingRequest request) {
         Meeting meeting = request.toEntity();
-        return meetingRepository.save(meeting);
+        meetingRepository.save(meeting);
+        addAttendee(meeting, request.getAttendees());
+        return meeting;
     }
 
     @Transactional
@@ -50,6 +56,11 @@ public class GroupService {
     @Transactional
     public void addAttendee(Long id, List<AttendeeRequest> requests) {
         Meeting meeting = findMeetingById(id);
+        addAttendee(meeting, requests);
+    }
+
+    @Transactional
+    public void addAttendee(Meeting meeting,  List<AttendeeRequest> requests) {
         List<Attendee> attendees = requests.stream()
                 .map(m -> m.toEntity(meeting))
                 .toList();
@@ -62,10 +73,19 @@ public class GroupService {
 
         Optional<Meeting> mOptional = meetingRepository.findByKey(key);
         if (mOptional.isEmpty()) return false;
-        Optional<Attendee> aOptional = attendeeRepository.findByMeetingAndName(mOptional.get(), request.getName());
-        if (aOptional.isPresent()) {
-            Attendee attendee = aOptional.get();
-            attendee.confirmAttendance();
+        Meeting meeting = mOptional.get();
+        Optional<Attendee> attendee;
+        if (VerificationMethod.NAME == meeting.getVerificationMethod()) {
+            attendee = attendeeRepository.findByMeetingAndName(mOptional.get(), request.getName());
+        } else if (VerificationMethod.EMAIL == meeting.getVerificationMethod()) {
+            attendee = attendeeRepository.findByMeetingAndEmail(mOptional.get(), request.getEmail());
+        } else if (VerificationMethod.PHONE == meeting.getVerificationMethod()){
+            attendee = attendeeRepository.findByMeetingAndPhone(mOptional.get(), request.getPhone());
+        } else {
+            attendee = attendeeRepository.findByMeetingAndName(meeting, request.getName());
+        }
+        if (attendee.isPresent()) {
+            attendee.get().confirmAttendance();
             return true;
         }
         return false;

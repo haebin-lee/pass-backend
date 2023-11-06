@@ -1,5 +1,6 @@
 package com.lucy.pass.response;
 
+import com.lucy.pass.dto.VerificationMethod;
 import com.lucy.pass.repository.Meeting;
 import lombok.Getter;
 
@@ -18,6 +19,7 @@ public class MeetingResponse {
     private final String key;
     private final LocalDateTime eventAt;
     private final boolean registerNow;
+    private final VerificationMethod verificationMethod;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
@@ -32,6 +34,7 @@ public class MeetingResponse {
         this.key = meeting.getKey();
         this.eventAt = meeting.getEventAt();
         this.registerNow = meeting.isRegisterNow();
+        this.verificationMethod = meeting.getVerificationMethod();
         this.createdAt = meeting.getCreatedAt();
         this.updatedAt = meeting.getUpdatedAt();
     }
