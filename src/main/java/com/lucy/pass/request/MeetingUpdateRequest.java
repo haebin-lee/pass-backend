@@ -1,5 +1,6 @@
 package com.lucy.pass.request;
 
+import com.lucy.pass.dto.VerificationMethod;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 
@@ -14,6 +15,7 @@ public class MeetingUpdateRequest {
     private String name;
     private String description;
     private LocalDateTime eventAt;
+    private VerificationMethod verificationMethod;
     private boolean registerNow;
     private List<AttendeeRequest> attendees;
 

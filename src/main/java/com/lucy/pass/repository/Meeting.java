@@ -2,6 +2,7 @@ package com.lucy.pass.repository;
 
 
 import com.lucy.pass.dto.VerificationMethod;
+import com.lucy.pass.request.AttendeeRequest;
 import com.lucy.pass.request.MeetingUpdateRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -29,7 +30,7 @@ public final class Meeting {
 
     private String description;
 
-    @OneToMany(mappedBy = "meeting", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "meeting", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<Attendee> attendees = new ArrayList<>();
 
     private String qrUrl;
@@ -76,13 +77,15 @@ public final class Meeting {
         this.name = request.getName();
         this.description = request.getDescription();
         this.eventAt = request.getEventAt();
+        this.verificationMethod = request.getVerificationMethod();
         this.registerNow = request.isRegisterNow();
         this.updatedAt = LocalDateTime.now();
 
         this.attendees.clear();
-        this.attendees = request.getAttendees().stream()
-                .map(attendee -> new Attendee(this, attendee))
-                .collect(Collectors.toList());
+        List<Attendee> updated = request.getAttendees().stream()
+                .map(attendeeData -> new Attendee(this, attendeeData))
+                .toList();
+        this.attendees.addAll(updated);
     }
 
     public void addAttendees(List<Attendee> attendees) {
